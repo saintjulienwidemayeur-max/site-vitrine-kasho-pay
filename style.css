@@ -161,3 +161,16 @@ summary::-webkit-details-marker{display:none}summary::after{content:"+";font-siz
 .facts .fact .mark .brand{height:8px;max-width:17px}
 .facts .glass{padding:10px 14px}.facts b{font-size:15px}.facts .fact>span:not(.logos){font-size:12px}
 @media (max-width:900px){.facts{gap:8px}.facts .glass{padding:10px 12px}.facts b{font-size:14px}}
+
+/* phones: cards a bit larger than before, text block lower */
+@media (max-width:520px){
+ .marquee figure{width:156px;margin-right:14px}
+ .marquee .kcard{padding:10px 11px;border-radius:13px}
+ .marquee .kc-logo img{width:12px;height:12px}.marquee .kc-label{font-size:8.5px}.marquee .kc-num{font-size:9px}
+ .marquee .kc-bot small{font-size:5.5px}.marquee .kc-bot b{font-size:7.5px}.marquee .kc-bot .brand{height:14px}
+ .marquee figcaption{font-size:12px}
+ .hero-cards{width:76vw;height:44vw;top:15%}.hero-cards .kcard{width:46vw;padding:10px 11px;border-radius:13px}
+ .hero-cards .kc-logo img{width:15px;height:15px}.hero-cards .kc-label{font-size:9px}.hero-cards .kc-num{font-size:9.5px}
+ .hero-cards .kc-bot small{font-size:5.5px}.hero-cards .kc-bot b{font-size:8px}.hero-cards .kc-bot .brand{height:15px}
+ .hero-copy{margin-top:66vw}
+}
