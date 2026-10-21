@@ -98,12 +98,12 @@ const T = {
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const visa = (c = "#fff") => `<svg class="brand" viewBox="0 0 64 22" role="img" aria-label="Visa"><text x="32" y="18" text-anchor="middle" font-size="22" font-weight="900" font-style="italic" letter-spacing="-0.5" font-family="Arial Black, Arial, Helvetica, sans-serif" fill="${c}">VISA</text></svg>`;
 const mc = () => `<svg class="brand" viewBox="0 0 40 24" role="img" aria-label="Mastercard"><circle cx="15" cy="12" r="10" fill="#EB001B"/><circle cx="25" cy="12" r="10" fill="#F79E1B"/><path d="M20 4.3a10 10 0 0 1 0 15.4 10 10 0 0 1 0-15.4z" fill="#FF5F00"/></svg>`;
-// Same gradients as the app card colours (src/lib/card-colors.ts).
+// Exactly the gradients of the app card colours (src/lib/card-colors.ts).
 const GRAD = {
-  mint: "linear-gradient(135deg,#6ee7a8 0%,#10b981 55%,#0d9488 100%)", sunset: "linear-gradient(135deg,#ff8fa3 0%,#e879f9 50%,#8b5cf6 100%)",
-  ocean: "linear-gradient(135deg,#7dd3fc 0%,#38bdf8 35%,#4f7cff 100%)", gold: "linear-gradient(135deg,#fde68a 0%,#fbbf24 40%,#f97316 100%)",
-  midnight: "linear-gradient(135deg,#7c8cff 0%,#475569 45%,#1e293b 100%)", forest: "linear-gradient(135deg,#86efac 0%,#22c55e 45%,#0f9d6b 100%)",
-  chrome: "linear-gradient(135deg,#f1f5f9 0%,#b6c2d3 45%,#7b8aa3 100%)",
+  mint: "linear-gradient(135deg,#22c55e 0%,#0f766e 100%)", sunset: "linear-gradient(135deg,#fb7185 0%,#7c3aed 100%)",
+  ocean: "linear-gradient(135deg,#38bdf8 0%,#1e1b4b 100%)", gold: "linear-gradient(135deg,#f59e0b 0%,#7c2d12 100%)",
+  midnight: "linear-gradient(135deg,#334155 0%,#000000 100%)", forest: "linear-gradient(135deg,#16a34a 0%,#064e3b 100%)",
+  chrome: "linear-gradient(135deg,#cbd5e1 0%,#475569 100%)",
 };
 const kcard = (t, color, brand, last4, extra = "") => `<div class="kcard ${extra}" style="--g:${GRAD[color]}" aria-hidden="true">
   <div class="kc-top"><span class="kc-logo"><img src="/img/kasho-logo.webp" alt="" width="30" height="30"></span><span class="kc-label">Kasho Pay</span></div>
