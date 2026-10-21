@@ -209,8 +209,8 @@ function page(t) {
     <a class="pill" href="${APP_URL}/signup">${esc(t.hero.cta)}<span class="dot">${arrow}</span></a>
   </div>
   <ul class="facts">
-    <li class="glass"><b>${esc(t.hero.f1)}</b><span>${esc(t.hero.f1s)}</span></li>
-    <li class="glass"><b>${esc(t.hero.f2)}</b><span>${esc(t.hero.f2s)}</span></li>
+    <li class="glass fact"><span class="logos"><img src="/img/moncash.webp" width="30" height="30" alt="MonCash"><img src="/img/natcash.webp" width="30" height="30" alt="NatCash"></span><b>${esc(t.hero.f1)}</b><span>${esc(t.hero.f1s)}</span></li>
+    <li class="glass fact"><span class="logos"><span class="mark">${visa("#fff")}</span><span class="mark">${mc()}</span></span><b>${esc(t.hero.f2)}</b><span>${esc(t.hero.f2s)}</span></li>
   </ul>
 </section>
 

@@ -147,3 +147,10 @@ summary::-webkit-details-marker{display:none}summary::after{content:"+";font-siz
  .hero-cards .kc-bot small{font-size:5px}.hero-cards .kc-bot b{font-size:7px}.hero-cards .kc-bot .brand{height:14px}
  .hero-copy{margin-top:48vw}
 }
+
+/* logos inside the two hero facts */
+.facts .fact .logos{display:flex;gap:8px;margin-bottom:10px}
+.facts .fact .logos img{width:30px;height:30px;border-radius:8px;background:#fff;object-fit:contain}
+.facts .fact .mark{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:#0b1510;border:1px solid var(--line)}
+.facts .fact .mark .brand{height:11px;width:auto;max-width:24px}
+.facts .fact>span:not(.logos){display:block}
