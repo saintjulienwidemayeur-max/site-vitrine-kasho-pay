@@ -125,7 +125,7 @@ summary::-webkit-details-marker{display:none}summary::after{content:"+";font-siz
 
 /* smaller logo without background, outlined in white so the black K stays visible on dark cards */
 .kc-logo{width:auto;height:auto;background:none;box-shadow:none;border-radius:0;display:block}
-.kc-logo img{width:19px;height:19px;filter:drop-shadow(0 0 .5px #fff) drop-shadow(0 0 .5px #fff) drop-shadow(0 0 1.4px #fffc)}
+.kc-logo img{width:19px;height:19px}
 .marquee .kc-logo{width:auto;height:auto;border-radius:0}.marquee .kc-logo img{width:13px;height:13px}
 /* more compact features strip */
 .perks{max-width:860px;border-radius:18px}
