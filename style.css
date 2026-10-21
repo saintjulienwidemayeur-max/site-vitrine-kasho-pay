@@ -154,3 +154,10 @@ summary::-webkit-details-marker{display:none}summary::after{content:"+";font-siz
 .facts .fact .mark{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:#0b1510;border:1px solid var(--line)}
 .facts .fact .mark .brand{height:11px;width:auto;max-width:24px}
 .facts .fact>span:not(.logos){display:block}
+
+/* smaller hero facts */
+.facts .fact .logos{gap:6px;margin-bottom:6px}
+.facts .fact .logos img,.facts .fact .mark{width:22px;height:22px;border-radius:6px}
+.facts .fact .mark .brand{height:8px;max-width:17px}
+.facts .glass{padding:10px 14px}.facts b{font-size:15px}.facts .fact>span:not(.logos){font-size:12px}
+@media (max-width:900px){.facts{gap:8px}.facts .glass{padding:10px 12px}.facts b{font-size:14px}}
