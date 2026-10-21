@@ -59,9 +59,6 @@ h1,h2,h3{line-height:1.08;letter-spacing:-.02em}
 .cards::before,.security::before{content:"";position:absolute;inset:0;background:radial-gradient(50% 40% at 50% 0,#2fe61914,transparent);pointer-events:none}
 .card-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:26px;margin:54px 0 36px}
 .card-row figure{text-align:center}.card-row figcaption{margin-top:12px;color:var(--mut);font-size:14px;font-weight:600}
-.perks{list-style:none;display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:18px}
-.perks li{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:var(--glass);border:1px solid var(--line);font-size:14px;font-weight:600}.perks li svg{color:var(--g)}
-.perks .price{background:var(--g);color:#031004;border-color:var(--g);font-weight:800}
 .fine{color:var(--mut);font-size:13px;max-width:640px;margin:18px auto 0}
 .shot-row{display:flex;gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;padding:46px 4px 20px;margin-top:10px;scrollbar-width:thin}
 .shot{flex:none;scroll-snap-align:center;text-align:center;width:min(240px,66vw)}.shot figcaption{margin-top:18px}.shot b{display:block;font-size:16px}.shot span{color:var(--mut);font-size:13px}
@@ -111,3 +108,17 @@ summary::-webkit-details-marker{display:none}summary::after{content:"+";font-siz
 @keyframes slide-right{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 @media (prefers-reduced-motion:reduce){.marquee{overflow-x:auto;mask-image:none;-webkit-mask-image:none}.marquee .track{animation:none}.marquee figure[aria-hidden]{display:none}}
 .foot .notice{padding-bottom:22px;margin-bottom:22px;border-bottom:1px solid var(--line);font-size:14px;color:#b5c9bb}.foot .notice p{max-width:760px}.foot .notice strong{color:var(--tx)}
+
+/* logo badge on the cards */
+.kc-logo{width:30px;height:30px;border-radius:9px;background:#fff;display:grid;place-items:center;box-shadow:0 2px 8px #0005;flex:none}.kc-logo img{width:20px;height:20px;border-radius:0}
+.marquee .kc-logo{width:20px;height:20px;border-radius:6px}.marquee .kc-logo img{width:13px;height:13px}
+/* features under the cards: columns split by hairlines, one icon each */
+.perks{display:grid;grid-template-columns:1fr auto;align-items:stretch;gap:0;list-style:none;padding:0;margin:0 auto 18px;max-width:1000px;border-radius:24px;overflow:hidden}
+.perks ul{list-style:none;display:grid;grid-template-columns:repeat(4,1fr)}
+.perks li{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding:24px 22px;border:0;border-radius:0;background:none;font-weight:600;font-size:14px;line-height:1.4;border-right:1px solid var(--line)}
+.perks .pi{width:42px;height:42px;border-radius:12px;border:1px solid #2fe61955;color:var(--g);display:grid;place-items:center;background:#2fe61910}
+.perks .cost{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:24px 34px;background:linear-gradient(160deg,#2fe61926,#2fe61908)}
+.perks .cost b{font-size:44px;line-height:1;letter-spacing:-.03em;color:var(--g)}.perks .cost span{font-size:13px;color:#b5c9bb}
+@media (max-width:900px){.perks{grid-template-columns:1fr}.perks ul{grid-template-columns:1fr 1fr}.perks li{border-bottom:1px solid var(--line)}.perks .cost{flex-direction:row;align-items:baseline;gap:12px;padding:18px 22px}}
+@media (max-width:520px){.perks ul{grid-template-columns:1fr}.perks li{flex-direction:row;align-items:center;border-right:0;padding:16px 18px}}
+.ic svg{width:18px;height:18px}

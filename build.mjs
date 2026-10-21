@@ -46,7 +46,7 @@ const T = {
       h2: "Votre carte Visa ou Mastercard, en une minute",
       p: "Payez en ligne en dollars américains (USD). Choisissez le réseau, la couleur, et chargez la carte dès 2 $ depuis votre portefeuille.",
       perks: ["Visa ou Mastercard", "7 couleurs au choix", "Gelez, retirez ou fermez la carte dans l'app", "Détails de la carte protégés par un code à 4 chiffres"],
-      from: "Création de la carte : 10 $",
+      from: "Création de la carte : 10 $", fromLabel: "pour créer votre carte",
       names: { mint: "Mint", sunset: "Sunset", ocean: "Ocean", gold: "Gold", midnight: "Midnight", forest: "Forest", chrome: "Chrome" },
       note: "Les cartes fonctionnent sur les sites et apps qui acceptent les cartes USD, surtout des commerçants américains. Certaines catégories (jeux d'argent, crypto, transferts d'argent...) sont refusées.",
       holder: "TITULAIRE", expires: "EXPIRE", name: "MARIE JEAN",
@@ -106,10 +106,24 @@ const GRAD = {
   chrome: "linear-gradient(135deg,#cbd5e1 0%,#475569 100%)",
 };
 const kcard = (t, color, brand, last4, extra = "") => `<div class="kcard ${extra}" style="--g:${GRAD[color]}" aria-hidden="true">
-  <div class="kc-top"><img src="/img/kasho-mark.webp" alt="" width="34" height="34" loading="lazy"><span class="kc-label">Kasho Pay</span></div>
+  <div class="kc-top"><span class="kc-logo"><img src="/img/kasho-logo.webp" alt="" width="20" height="20"></span><span class="kc-label">Kasho Pay</span></div>
   <div class="kc-num">•••• •••• •••• ${last4}</div>
   <div class="kc-bot"><div><small>${esc(t.cards.holder)}</small><b>${esc(t.cards.name)}</b></div><div><small>${esc(t.cards.expires)}</small><b>08/29</b></div>${brand === "visa" ? visa() : mc()}</div>
 </div>`;
+
+// Line icons (24x24, 1.6 stroke), one per feature so the lists do not rely on generic check marks.
+const ico = (d) => `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+const ICONS = {
+  card: ico('<rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M2.5 10h19M6.5 15h4"/>'),
+  swatch: ico('<path d="M12 3.5c3.2 3.6 5.5 6.3 5.5 9.2a5.5 5.5 0 0 1-11 0c0-2.9 2.3-5.6 5.5-9.2z"/><path d="M9.2 13.6a3 3 0 0 0 2.2 2.4"/>'),
+  freeze: ico('<path d="M12 2.5v19M4.2 7l15.6 10M19.8 7 4.2 17"/><path d="M9.5 4.2 12 6.5l2.5-2.3M9.5 19.8 12 17.5l2.5 2.3"/>'),
+  keypad: ico('<rect x="4" y="3" width="16" height="18" rx="3.5"/><path d="M9 8h.01M12 8h.01M15 8h.01M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01" stroke-width="2.4"/>'),
+  identity: ico('<rect x="2.5" y="5" width="19" height="14" rx="3"/><circle cx="9" cy="11" r="2.2"/><path d="M5.8 16c.6-1.6 1.8-2.4 3.2-2.4s2.6.8 3.2 2.4M15 10h3.5M15 13.5h3.5"/>'),
+  phone: ico('<rect x="6.5" y="2.5" width="11" height="19" rx="3"/><path d="M10.5 18.5h3M9.5 8.5l1.8 1.8 3.2-3.4"/>'),
+  data: ico('<ellipse cx="12" cy="5.5" rx="7.5" ry="3"/><path d="M4.5 5.5v6.5c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V5.5M4.5 12v6.5c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V12"/>'),
+  gauge: ico('<path d="M4 17a8.5 8.5 0 1 1 16 0"/><path d="M12 17l4-5.5"/><circle cx="12" cy="17" r="1"/>'),
+  key: ico('<circle cx="8" cy="12" r="4"/><path d="M12 12h9M17.5 12v3.2M20.5 12v2"/>'),
+};
 const arrow = `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const check = `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
@@ -229,7 +243,10 @@ function page(t) {
           .map(([c, b, l]) => `<figure${dup ? ' aria-hidden="true"' : ""}>${kcard(t, c, b, l)}<figcaption>${esc(t.cards.names[c])}</figcaption></figure>`).join("")).join("")}
       </div>
     </div>
-    <ul class="perks reveal">${t.cards.perks.map((p) => `<li>${check}${esc(p)}</li>`).join("")}<li class="price">${esc(t.cards.from)}</li></ul>
+    <div class="perks glass reveal">
+      <ul>${t.cards.perks.map((p, i) => `<li><span class="pi">${ICONS[["card", "swatch", "freeze", "keypad"][i]]}</span><span>${esc(p)}</span></li>`).join("")}</ul>
+      <p class="cost"><b>10 $</b><span>${esc(t.cards.fromLabel)}</span></p>
+    </div>
     <p class="fine center">${esc(t.cards.note)}</p>
   </div>
 </section>
@@ -247,7 +264,7 @@ function page(t) {
 <section class="sec security" id="sekirite">
   <div class="wrap">
     <div class="center reveal"><p class="kicker">${esc(t.security.kicker)}</p><h2>${esc(t.security.h2)}</h2></div>
-    <ul class="sec-grid">${t.security.items.map(([a, b]) => `<li class="glass reveal"><span class="ic">${check}</span><h3>${esc(a)}</h3><p>${esc(b)}</p></li>`).join("")}</ul>
+    <ul class="sec-grid">${t.security.items.map(([a, b], i) => `<li class="glass reveal"><span class="ic">${ICONS[["identity", "phone", "keypad", "data", "gauge", "key"][i]]}</span><h3>${esc(a)}</h3><p>${esc(b)}</p></li>`).join("")}</ul>
   </div>
 </section>
 
