@@ -134,3 +134,16 @@ summary::-webkit-details-marker{display:none}summary::after{content:"+";font-siz
 .perks .cost{padding:14px 24px}.perks .cost b{font-size:30px}.perks .cost span{font-size:12px}
 @media (max-width:900px){.perks .cost{padding:12px 18px}}
 @media (max-width:520px){.perks li{padding:12px 14px}}
+
+/* phones: smaller cards */
+@media (max-width:520px){
+ .marquee figure{width:128px;margin-right:12px}
+ .marquee .kcard{padding:8px 9px;border-radius:11px}
+ .marquee .kc-logo img{width:10px;height:10px}.marquee .kc-label{font-size:7px}.marquee .kc-num{font-size:7.5px}
+ .marquee .kc-bot small{font-size:5px}.marquee .kc-bot b{font-size:6px}.marquee .kc-bot{gap:8px}.marquee .kc-bot .brand{height:12px}
+ .marquee figcaption{font-size:11px;margin-top:6px}
+ .hero-cards{width:66vw;height:38vw;top:15%}.hero-cards .kcard{width:38vw;padding:8px 9px;border-radius:11px}
+ .hero-cards .kc-logo img{width:13px;height:13px}.hero-cards .kc-label{font-size:8px}.hero-cards .kc-num{font-size:8px}
+ .hero-cards .kc-bot small{font-size:5px}.hero-cards .kc-bot b{font-size:7px}.hero-cards .kc-bot .brand{height:14px}
+ .hero-copy{margin-top:48vw}
+}
