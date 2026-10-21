@@ -122,3 +122,15 @@ summary::-webkit-details-marker{display:none}summary::after{content:"+";font-siz
 @media (max-width:900px){.perks{grid-template-columns:1fr}.perks ul{grid-template-columns:1fr 1fr}.perks li{border-bottom:1px solid var(--line)}.perks .cost{flex-direction:row;align-items:baseline;gap:12px;padding:18px 22px}}
 @media (max-width:520px){.perks ul{grid-template-columns:1fr}.perks li{flex-direction:row;align-items:center;border-right:0;padding:16px 18px}}
 .ic svg{width:18px;height:18px}
+
+/* smaller logo without background, outlined in white so the black K stays visible on dark cards */
+.kc-logo{width:auto;height:auto;background:none;box-shadow:none;border-radius:0;display:block}
+.kc-logo img{width:19px;height:19px;filter:drop-shadow(0 0 .5px #fff) drop-shadow(0 0 .5px #fff) drop-shadow(0 0 1.4px #fffc)}
+.marquee .kc-logo{width:auto;height:auto;border-radius:0}.marquee .kc-logo img{width:13px;height:13px}
+/* more compact features strip */
+.perks{max-width:860px;border-radius:18px}
+.perks li{gap:10px;padding:14px 16px;font-size:13px}
+.perks .pi{width:32px;height:32px;border-radius:10px}.perks .pi svg{width:17px;height:17px}
+.perks .cost{padding:14px 24px}.perks .cost b{font-size:30px}.perks .cost span{font-size:12px}
+@media (max-width:900px){.perks .cost{padding:12px 18px}}
+@media (max-width:520px){.perks li{padding:12px 14px}}
