@@ -2,7 +2,7 @@
 
 Static site (no framework, no dependencies) in French, built for Haiti: low weight (about 0.5 MB with all screenshots), mobile first, SEO ready.
 
-- `build.mjs` generates `index.html`, `fr/index.html`, `sitemap.xml`, `robots.txt`, `site.webmanifest`. **Edit the texts there**, then rebuild.
+- `build.mjs` generates `index.html`, `sitemap.xml`, `robots.txt`, `site.webmanifest`. **Edit the texts there**, then rebuild.
 - `style.css`, `site.js`: design and the small menu / reveal script.
 - `img/`: Kasho logo, icons, `og.jpg` (social sharing image) and the app screenshots (`app-*.webp`).
 
