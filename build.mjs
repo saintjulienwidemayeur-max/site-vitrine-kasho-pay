@@ -78,7 +78,6 @@ const T = {
         ["Comment mettre de l'argent dans mon portefeuille ?", "Dans l'app, choisissez Ajouter de l'argent, saisissez le montant (de 5 $ à 100 $) et choisissez MonCash ou NatCash. Vous arrivez sur la page de paiement sécurisée et votre portefeuille est crédité automatiquement une fois le paiement confirmé."],
         ["Où la carte fonctionne-t-elle ?", "Les cartes sont des cartes virtuelles en dollars américains (USD). Elles sont acceptées chez les commerçants qui acceptent les cartes USD, surtout américains. Certaines catégories et certains pays sont refusés."],
         ["Combien ça coûte ?", "La création de la carte coûte 10 $. Les autres frais dépendent de l'opération et du montant, et l'app les affiche toujours avant que vous confirmiez."],
-        ["Kasho Pay est-elle une banque ?", "Non. Kasho Pay n'est pas une banque : c'est une fintech. Nous proposons un service de paiement numérique (portefeuille et cartes virtuelles), avec des cartes émises via notre partenaire Freda Pay Issuing."],
         ["Dois-je vérifier mon identité ?", "Oui. Pour créer une carte, vous devez vérifier votre identité (pièce d'identité et selfie) et avoir au moins 18 ans."],
         ["Dois-je télécharger une application ?", "Non. Kasho Pay s'ouvre dans le navigateur de votre téléphone et vous pouvez l'ajouter à l'écran d'accueil."],
       ],
@@ -90,7 +89,7 @@ const T = {
       methodsH: "Moyens de paiement pris en charge",
     },
     cta: { h2: "Commencez avec Kasho Pay aujourd'hui", p: "Créez votre compte gratuitement en quelques minutes.", btn: "Créer mon compte" },
-    footer: { rights: "Tous droits réservés.", links: "Liens", contact: "Nous contacter", note: "Kasho Pay est un service de KASHOPAY LLC. Kasho Pay n'est pas une banque : nous sommes une fintech." },
+    footer: { rights: "Tous droits réservés.", links: "Liens", contact: "Nous contacter", note: "Kasho Pay est un service de KASHOPAY LLC." },
     og: "Portefeuille numérique et cartes Visa et Mastercard pour Haïti",
   },
 };
@@ -198,7 +197,6 @@ function page(t) {
   <ul class="facts">
     <li class="glass"><b>${esc(t.hero.f1)}</b><span>${esc(t.hero.f1s)}</span></li>
     <li class="glass"><b>${esc(t.hero.f2)}</b><span>${esc(t.hero.f2s)}</span></li>
-    <li class="secure"><i></i>${esc(t.hero.secure)}</li>
   </ul>
 </section>
 
@@ -225,9 +223,11 @@ function page(t) {
       <h2>${esc(t.cards.h2)}</h2>
       <p class="sub">${esc(t.cards.p)}</p>
     </div>
-    <div class="card-row">
-      ${[["ocean", "visa", "4821"], ["mint", "mc", "7710"], ["sunset", "visa", "1156"], ["gold", "mc", "8034"], ["midnight", "visa", "2290"], ["forest", "mc", "6617"], ["chrome", "visa", "5503"]]
-        .map(([c, b, l]) => `<figure class="reveal">${kcard(t, c, b, l)}<figcaption>${esc(t.cards.names[c])}</figcaption></figure>`).join("")}
+    <div class="marquee" role="group" aria-label="${esc(t.cards.h2)}">
+      <div class="track">
+        ${[0, 1].map((dup) => [["ocean", "visa", "4821"], ["mint", "mc", "7710"], ["sunset", "visa", "1156"], ["gold", "mc", "8034"], ["midnight", "visa", "2290"], ["forest", "mc", "6617"], ["chrome", "visa", "5503"]]
+          .map(([c, b, l]) => `<figure${dup ? ' aria-hidden="true"' : ""}>${kcard(t, c, b, l)}<figcaption>${esc(t.cards.names[c])}</figcaption></figure>`).join("")).join("")}
+      </div>
     </div>
     <ul class="perks reveal">${t.cards.perks.map((p) => `<li>${check}${esc(p)}</li>`).join("")}<li class="price">${esc(t.cards.from)}</li></ul>
     <p class="fine center">${esc(t.cards.note)}</p>
@@ -249,10 +249,6 @@ function page(t) {
     <div class="center reveal"><p class="kicker">${esc(t.security.kicker)}</p><h2>${esc(t.security.h2)}</h2></div>
     <ul class="sec-grid">${t.security.items.map(([a, b]) => `<li class="glass reveal"><span class="ic">${check}</span><h3>${esc(a)}</h3><p>${esc(b)}</p></li>`).join("")}</ul>
   </div>
-</section>
-
-<section class="sec fintech">
-  <div class="wrap narrow"><div class="glass notbank reveal"><h2>${esc(t.fintech.h2)}</h2><p>${esc(t.fintech.p)}</p></div></div>
 </section>
 
 <section class="sec partners" id="partenaires">
@@ -288,6 +284,7 @@ function page(t) {
 </main>
 
 <footer class="foot">
+  <div class="wrap notice"><p><strong>${esc(t.fintech.h2)}.</strong> ${esc(t.fintech.p)}</p></div>
   <div class="wrap foot-in">
     <a class="logo" href="${t.path}"><img src="/img/kasho-mark.webp" alt="" width="36" height="36" loading="lazy"><span>Kasho Pay</span></a>
     <p>${esc(t.footer.note)}<br>© ${new Date().getFullYear()} KASHOPAY LLC. ${esc(t.footer.rights)}</p>
