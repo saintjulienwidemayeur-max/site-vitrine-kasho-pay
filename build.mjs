@@ -8,6 +8,7 @@
 //   WHATSAPP       international number without + (e.g. 50937001234), shown in the footer when set
 import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { legalPages, UPDATED } from "./legal.mjs";
 import { fileURLToPath } from "node:url";
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
@@ -16,6 +17,21 @@ const APP_URL = (process.env.APP_URL ?? "https://kasho-pay-1.onrender.com").repl
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL ?? "";
 const WHATSAPP = (process.env.WHATSAPP ?? "").replace(/\D/g, "");
 const TODAY = new Date().toISOString().slice(0, 10);
+// Company details used in the legal pages. Anything still in [brackets] must be filled in (here or with the LEGAL_* variables):
+// pages that still contain a placeholder are marked noindex and left out of the sitemap.
+const LEGAL = {
+  company: "KASHOPAY LLC",
+  legalForm: process.env.LEGAL_FORM ?? "société à responsabilité limitée (LLC)",
+  address: process.env.LEGAL_ADDRESS ?? "[adresse du siège social]",
+  regNumber: process.env.LEGAL_REG_NUMBER ?? "[numéro d'immatriculation]",
+  publisher: process.env.LEGAL_PUBLISHER ?? "[nom du directeur de la publication]",
+  email: CONTACT_EMAIL || "[adresse e-mail de contact]",
+  law: process.env.LEGAL_LAW ?? "[droit applicable, par exemple le droit de l'État d'immatriculation de KASHOPAY LLC]",
+  court: process.env.LEGAL_COURT ?? "[tribunaux compétents]",
+  retention: process.env.LEGAL_RETENTION ?? "[durée de conservation à confirmer, par exemple 5 ans après la fermeture du compte]",
+  disputeDelay: process.env.LEGAL_DISPUTE_DELAY ?? "[délai de réponse, par exemple 15 jours ouvrables]",
+};
+const PLACEHOLDER = /\[[A-Za-zÀ-ÿ][^\]<]*\]/;
 
 // ------------------------------------------------------------------ texts
 const T = {
@@ -301,6 +317,7 @@ function page(t) {
 </main>
 
 <footer class="foot">
+  <nav class="wrap legal-links" aria-label="Informations légales">${legalPages(LEGAL).map((p) => `<a href="/${p.slug}/">${esc(p.title)}</a>`).join("")}</nav>
   <div class="wrap notice"><p><strong>${esc(t.fintech.h2)}.</strong> ${esc(t.fintech.p)}</p></div>
   <div class="wrap foot-in">
     <a class="logo" href="${t.path}"><img src="/img/kasho-mark.webp" alt="" width="36" height="36" loading="lazy"><span>Kasho Pay</span></a>
@@ -314,12 +331,61 @@ function page(t) {
 `;
 }
 
+// ------------------------------------------------------------------ legal pages
+function legalPage(p, all) {
+  const url = abs(`/${p.slug}/`);
+  const open = PLACEHOLDER.test(p.html);
+  const email = CONTACT_EMAIL && `<a href="mailto:${esc(CONTACT_EMAIL)}">${esc(CONTACT_EMAIL)}</a>`;
+  return `<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(p.title)} | Kasho Pay</title>
+<meta name="description" content="${esc(p.desc)}">
+<meta name="robots" content="${open ? "noindex, follow" : "index, follow"}">
+<meta name="theme-color" content="#020604">
+<link rel="canonical" href="${url}">
+<link rel="icon" href="/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Kasho Pay"><meta property="og:locale" content="fr_HT">
+<meta property="og:title" content="${esc(p.title)} | Kasho Pay"><meta property="og:description" content="${esc(p.desc)}"><meta property="og:url" content="${url}">
+<meta property="og:image" content="${abs("/img/og.jpg")}">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body class="legal-body">
+<header class="top">
+  <a class="logo" href="/" aria-label="Kasho Pay"><img src="/img/kasho-mark.webp" alt="" width="40" height="40"><span>Kasho Pay</span></a>
+  <a class="pill small" href="/" style="margin-left:auto">Retour à l'accueil</a>
+</header>
+<main class="legal">
+  <article>
+    <h1>${esc(p.title)}</h1>
+    <p class="updated">Dernière mise à jour : ${UPDATED}</p>
+    ${p.html}
+  </article>
+  <nav class="legal-more" aria-label="Autres pages légales"><h2>Autres informations légales</h2><ul>${all.filter((q) => q.slug !== p.slug).map((q) => `<li><a href="/${q.slug}/">${esc(q.title)}</a></li>`).join("")}</ul></nav>
+</main>
+<footer class="foot"><div class="wrap foot-in"><a class="logo" href="/"><img src="/img/kasho-mark.webp" alt="" width="36" height="36"><span>Kasho Pay</span></a><p>Kasho Pay est un service de ${esc(LEGAL.company)}. Kasho Pay n'est pas une banque : nous sommes une fintech.<br>© ${new Date().getFullYear()} ${esc(LEGAL.company)}. Tous droits réservés.</p>${email ? `<p class="fl">Contact : ${email}</p>` : ""}</div></footer>
+</body>
+</html>
+`;
+}
+const LEGAL_PAGES = legalPages(LEGAL);
+const INDEXABLE = [];
+
 // ------------------------------------------------------------------ write
 const write = (rel, data) => { const f = join(ROOT, rel); mkdirSync(dirname(f), { recursive: true }); writeFileSync(f, data); };
 write("index.html", page(T.fr));
+for (const p of LEGAL_PAGES) {
+  write(`${p.slug}/index.html`, legalPage(p, LEGAL_PAGES));
+  if (!PLACEHOLDER.test(p.html)) INDEXABLE.push(`/${p.slug}/`);
+}
 write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${["/"].map((p) => `  <url><loc>${abs(p)}</loc><lastmod>${TODAY}</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>`).join("\n")}
+${["/", ...INDEXABLE].map((p) => `  <url><loc>${abs(p)}</loc><lastmod>${TODAY}</lastmod><changefreq>monthly</changefreq><priority>${p === "/" ? "1.0" : "0.4"}</priority></url>`).join("\n")}
 </urlset>
 `);
 write("robots.txt", `User-agent: *\nAllow: /\n\nSitemap: ${abs("/sitemap.xml")}\n`);

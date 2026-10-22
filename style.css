@@ -191,3 +191,16 @@ summary::-webkit-details-marker{display:none}summary::after{content:"+";font-siz
 .kc-logo img{width:36px;height:36px}
 .marquee .kc-logo img{width:27px;height:27px}
 @media (max-width:520px){.marquee .kc-logo img{width:22px;height:22px}.hero-cards .kc-logo img{width:28px;height:28px}}
+
+/* legal pages */
+.legal{width:min(780px,100% - 40px);margin:0 auto;padding:120px 0 40px}
+.legal h1{font-size:clamp(30px,5vw,46px);margin-bottom:8px}.legal .updated{color:var(--mut);font-size:14px;margin-bottom:26px}
+.legal .lead{font-size:18px;color:#cfe3d5;margin-bottom:10px}
+.legal h2{font-size:22px;margin:34px 0 10px;letter-spacing:-.01em}
+.legal p,.legal li{color:#b9cdbf;font-size:16px;line-height:1.7}.legal p{margin:10px 0}
+.legal ul,.legal ol{margin:10px 0 10px 22px;display:grid;gap:6px}
+.legal strong{color:var(--tx)}.legal a{color:var(--g);text-decoration:underline;text-underline-offset:3px}
+.legal-more{margin-top:50px;padding-top:24px;border-top:1px solid var(--line)}.legal-more h2{font-size:16px;color:var(--mut);margin:0 0 10px;text-transform:uppercase;letter-spacing:.1em}
+.legal-more ul{list-style:none;margin:0;display:flex;flex-wrap:wrap;gap:8px 18px}.legal-more a{font-size:15px}
+.legal-body .top{position:sticky}
+.legal-links{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13px;padding-bottom:18px}.legal-links a{color:var(--mut)}.legal-links a:hover{color:#fff}

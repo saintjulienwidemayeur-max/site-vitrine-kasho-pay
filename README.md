@@ -23,3 +23,10 @@ New > Static Site > this repository (branch `main`). Build command: empty. Publi
 
 ## Refreshing the app screenshots
 They were captured from the app with demo data (mock account "Marie Jean"). Retake them after a visual change to the app.
+
+## Legal pages
+`legal.mjs` holds the texts (French) of seven pages: conditions d'utilisation, politique de confidentialité, mentions légales, politique de cookies, conditions des cartes virtuelles, frais et réclamations, lutte contre la fraude. They are drafts: **have a lawyer review them**.
+
+Company details still in `[brackets]` must be filled in, with these variables when building (or by editing `build.mjs`):
+`LEGAL_ADDRESS`, `LEGAL_REG_NUMBER`, `LEGAL_PUBLISHER`, `CONTACT_EMAIL`, `LEGAL_LAW`, `LEGAL_COURT`, `LEGAL_RETENTION`, `LEGAL_DISPUTE_DELAY` (and `LEGAL_FORM` if it is not an LLC).
+A page that still contains a placeholder is built with `noindex` and left out of `sitemap.xml`, so incomplete pages are not indexed by search engines. Once everything is filled in, rebuild and they become indexable.
