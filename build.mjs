@@ -2,7 +2,7 @@
 //   node build.mjs
 // Writes index.html (Français), sitemap.xml and robots.txt.
 // Settings come from environment variables so the same files can be rebuilt for another domain:
-//   SITE_URL       public address of this site          (default https://www.kashopay.ht  <- CHANGE to the real domain)
+//   SITE_URL       public address of this site          (default https://kashopay.com)
 //   APP_URL        address of the Kasho Pay web app      (default https://kasho-pay-1.onrender.com)
 //   CONTACT_EMAIL  shown in the footer when set
 //   WHATSAPP       international number without + (e.g. 50937001234), shown in the footer when set
@@ -12,7 +12,7 @@ import { legalPages, UPDATED } from "./legal.mjs";
 import { fileURLToPath } from "node:url";
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
-const SITE_URL = (process.env.SITE_URL ?? "https://www.kashopay.ht").replace(/\/+$/, "");
+const SITE_URL = (process.env.SITE_URL ?? "https://kashopay.com").replace(/\/+$/, "");
 const APP_URL = (process.env.APP_URL ?? "https://kasho-pay-1.onrender.com").replace(/\/+$/, "");
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL ?? "";
 const WHATSAPP = (process.env.WHATSAPP ?? "").replace(/\D/g, "");

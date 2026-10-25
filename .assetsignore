@@ -1,0 +1,14 @@
+# Files that are part of the repository but must not be published on the site
+.git
+.gitignore
+.assetsignore
+node_modules
+.wrangler
+worker.js
+wrangler.jsonc
+build.mjs
+legal.mjs
+README.md
+render.yaml
+package.json
+package-lock.json
