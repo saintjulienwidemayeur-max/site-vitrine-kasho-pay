@@ -20,7 +20,7 @@ export function legalPages(L) {
 <p class="lead">Les présentes conditions d'utilisation (les « Conditions ») encadrent l'utilisation de Kasho Pay, le service de paiement numérique de ${co}. En créant un compte ou en utilisant le service, vous les acceptez.</p>
 
 <h2>1. Qui sommes-nous</h2>
-<p>Kasho Pay est édité par ${co} (« Kasho Pay », « nous »), ${L.legalForm}, dont le siège est situé à ${L.address}. <strong>Kasho Pay n'est pas une banque.</strong> Nous sommes une fintech : nous proposons un portefeuille numérique et des cartes virtuelles, sans activité de banque ni de crédit.</p>
+<p>Kasho Pay est édité par ${co} (« Kasho Pay », « nous »), ${L.legalForm}. <strong>Kasho Pay n'est pas une banque.</strong> Nous sommes une fintech : nous proposons un portefeuille numérique et des cartes virtuelles, sans activité de banque ni de crédit.</p>
 
 <h2>2. Le service</h2>
 <ul>
@@ -95,7 +95,7 @@ export function legalPages(L) {
 <p>Les Conditions sont régies par ${L.law}. Avant toute action, nous vous invitons à nous contacter pour chercher une solution amiable. À défaut, les tribunaux compétents sont ${L.court}, sous réserve des règles impératives qui vous protègent.</p>
 
 <h2>16. Contact</h2>
-<p>${co}, ${L.address}. Adresse électronique : ${contact}.</p>`,
+<p>${co}. Adresse électronique : ${contact}.</p>`,
     },
 
     {
@@ -106,7 +106,7 @@ export function legalPages(L) {
 <p class="lead">Cette politique explique quelles données personnelles ${co} collecte quand vous utilisez Kasho Pay, pourquoi, avec qui nous les partageons et quels sont vos droits.</p>
 
 <h2>1. Responsable du traitement</h2>
-<p>${co}, ${L.address}. Contact pour toute question sur vos données : ${contact}.</p>
+<p>${co}. Contact pour toute question sur vos données : ${contact}.</p>
 
 <h2>2. Données que nous collectons</h2>
 <ul>
@@ -167,8 +167,6 @@ export function legalPages(L) {
       html: `
 <h2>Éditeur du site</h2>
 <p>${co}, ${L.legalForm}.<br>
-Siège : ${L.address}.<br>
-Numéro d'immatriculation : ${L.regNumber}.<br>
 Directeur de la publication : ${L.publisher}.<br>
 Contact : ${contact}.</p>
 
