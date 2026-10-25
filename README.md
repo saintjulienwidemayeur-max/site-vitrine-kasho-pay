@@ -8,7 +8,7 @@ Static site (no framework, no dependencies) in French, built for Haiti: low weig
 
 ## Build for your real domain
 ```bash
-SITE_URL=https://www.your-domain.com APP_URL=https://kasho-pay-1.onrender.com \
+SITE_URL=https://www.your-domain.com APP_URL=https://app.kashopay.com \
 CONTACT_EMAIL=support@your-domain.com WHATSAPP=509XXXXXXXX node build.mjs
 ```
 `SITE_URL` goes into the canonical links, hreflang, sitemap, Open Graph and structured data: **it must be the real address of the site** (the default is `https://kashopay.com`).
