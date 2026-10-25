@@ -9,6 +9,7 @@
 import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { legalPages, UPDATED } from "./legal.mjs";
+import { seoPages } from "./seo-pages.mjs";
 import { fileURLToPath } from "node:url";
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
@@ -17,6 +18,7 @@ const APP_URL = (process.env.APP_URL ?? "https://app.kashopay.com").replace(/\/+
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL ?? "";
 const WHATSAPP = (process.env.WHATSAPP ?? "").replace(/\D/g, "");
 const TODAY = new Date().toISOString().slice(0, 10);
+const SEO_PAGES = seoPages();
 // Company details used in the legal pages. Anything still in [brackets] must be filled in (here or with the LEGAL_* variables):
 // pages that still contain a placeholder are marked noindex and left out of the sitemap.
 const LEGAL = {
@@ -39,7 +41,7 @@ const T = {
     lang: "fr", locale: "fr_HT", path: "/",
     title: "Kasho Pay | Portefeuille et cartes Visa Mastercard pour Haïti",
     description: "Rechargez avec MonCash et NatCash, envoyez de l'argent et créez une carte virtuelle Visa ou Mastercard en dollars. Simple, rapide, sécurisé.",
-    keywords: "Kasho Pay, portefeuille numérique Haïti, carte Visa Haïti, carte Mastercard Haïti, carte virtuelle, MonCash, NatCash, envoyer de l'argent Haïti, paiement en ligne Haïti, carte en dollars",
+    keywords: "Kasho Pay, KashoPay, Kasho-Pay, kat an Ayiti, kat Visa Haïti, kat Mastercard Haïti, carte Visa Haïti, carte Mastercard Haïti, carte virtuelle Haïti, portefeuille numérique Haïti, MonCash, NatCash, recharger MonCash, envoyer de l'argent Haïti, paiement en ligne Haïti, carte en dollars Haïti, fintech Haïti",
     nav: { features: "Services", cards: "Cartes", app: "L'app", partners: "Partenaires", faq: "Questions", start: "Commencer", menu: "Menu", skip: "Aller au contenu" },
     hero: {
       eyebrow: "Le portefeuille numérique pour Haïti",
@@ -148,11 +150,11 @@ const abs = (p) => `${SITE_URL}${p}`;
 function jsonLd(t) {
   const org = {
     "@type": "Organization", "@id": `${SITE_URL}/#org`, name: "Kasho Pay", legalName: "KASHOPAY LLC", url: abs("/"),
-    alternateName: "KASHOPAY",
+    alternateName: ["KashoPay", "KASHOPAY", "Kasho-Pay"],
     logo: { "@type": "ImageObject", "@id": `${SITE_URL}/#logo`, url: abs("/img/logo-512.png"), contentUrl: abs("/img/logo-512.png"), width: 512, height: 512, caption: "Logo Kasho Pay" },
     image: { "@id": `${SITE_URL}/#logo` }, areaServed: { "@type": "Country", name: "Haiti" },
   };
-  const site = { "@type": "WebSite", "@id": `${SITE_URL}/#site`, url: abs("/"), name: "Kasho Pay", alternateName: ["KASHOPAY", "Kasho Pay Haïti"], inLanguage: "fr", publisher: { "@id": `${SITE_URL}/#org` } };
+  const site = { "@type": "WebSite", "@id": `${SITE_URL}/#site`, url: abs("/"), name: "Kasho Pay", alternateName: ["KashoPay", "KASHOPAY", "Kasho-Pay", "Kasho Pay Haïti"], inLanguage: "fr", publisher: { "@id": `${SITE_URL}/#org` } };
   const appl = {
     "@type": "WebApplication", "@id": `${SITE_URL}/#app`, name: "Kasho Pay", url: APP_URL, applicationCategory: "FinanceApplication",
     operatingSystem: "Any (web browser)", inLanguage: t.lang, description: t.description, publisher: { "@id": `${SITE_URL}/#org` },
@@ -290,6 +292,13 @@ function page(t) {
   </div>
 </section>
 
+<section class="sec guides" id="guides">
+  <div class="wrap">
+    <div class="center reveal"><p class="kicker">Guides</p><h2>Ce que les Haïtiens cherchent</h2><p class="sub">Réponses courtes sur les cartes, MonCash et NatCash.</p></div>
+    <ul class="guide-grid">${SEO_PAGES.map((p) => `<li class="glass reveal"><a href="/${p.slug}/"><b>${esc(p.h1)}</b><span lang="ht">${esc(p.ht)}</span><i aria-hidden="true">→</i></a></li>`).join("")}</ul>
+  </div>
+</section>
+
 <section class="sec partners" id="partenaires">
   <div class="wrap narrow">
     <div class="center reveal"><p class="kicker">${esc(t.partners.kicker)}</p><h2>${esc(t.partners.h2)}</h2></div>
@@ -323,6 +332,7 @@ function page(t) {
 </main>
 
 <footer class="foot">
+  <nav class="wrap legal-links" aria-label="Guides">${SEO_PAGES.map((p) => `<a href="/${p.slug}/">${esc(p.h1)}</a>`).join("")}</nav>
   <nav class="wrap legal-links" aria-label="Informations légales">${legalPages(LEGAL).map((p) => `<a href="/${p.slug}/">${esc(p.title)}</a>`).join("")}</nav>
   <div class="wrap notice"><p><strong>${esc(t.fintech.h2)}.</strong> ${esc(t.fintech.p)}</p></div>
   <div class="wrap foot-in">
@@ -382,11 +392,74 @@ function legalPage(p, all) {
 `;
 }
 const LEGAL_PAGES = legalPages(LEGAL);
+
+function guidePage(p) {
+  const url = abs(`/${p.slug}/`);
+  const fill = (h) => h.replaceAll("{APP}", APP_URL);
+  const related = p.related.map((slug) => SEO_PAGES.find((q) => q.slug === slug)).filter(Boolean);
+  const ld = JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "WebPage", "@id": `${url}#page`, url, name: p.title, description: p.desc, inLanguage: "fr", isPartOf: { "@id": `${SITE_URL}/#site` }, about: { "@id": `${SITE_URL}/#org` }, primaryImageOfPage: { "@id": `${SITE_URL}/#logo` } },
+      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Accueil", item: abs("/") }, { "@type": "ListItem", position: 2, name: p.h1, item: url }] },
+      { "@type": "FAQPage", inLanguage: "fr", mainEntity: p.faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
+    ],
+  });
+  return `<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(p.title)}</title>
+<meta name="description" content="${esc(p.desc)}">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#020604">
+<link rel="canonical" href="${url}">
+<link rel="alternate" hreflang="fr" href="${url}"><link rel="alternate" hreflang="x-default" href="${url}">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/img/favicon-96.png" sizes="96x96" type="image/png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Kasho Pay"><meta property="og:locale" content="fr_HT">
+<meta property="og:title" content="${esc(p.title)}"><meta property="og:description" content="${esc(p.desc)}"><meta property="og:url" content="${url}">
+<meta property="og:image" content="${abs("/img/og.jpg")}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(p.title)}"><meta name="twitter:description" content="${esc(p.desc)}"><meta name="twitter:image" content="${abs("/img/og.jpg")}">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">${ld}</script>
+</head>
+<body class="legal-body">
+<header class="top">
+  <a class="logo" href="/" aria-label="Kasho Pay"><img src="/img/kasho-mark.webp" alt="" width="40" height="40"><span>Kasho Pay</span></a>
+  <a class="pill small" href="${APP_URL}/signup" style="margin-left:auto">Commencer</a>
+</header>
+<main class="legal guide">
+  <nav class="crumbs" aria-label="Fil d'Ariane"><a href="/">Accueil</a> <span aria-hidden="true">›</span> <span>${esc(p.h1)}</span></nav>
+  <article>
+    <h1>${esc(p.h1)}</h1>
+    <p class="ht-line" lang="ht">${esc(p.ht)}</p>
+    <p class="lead">${fill(p.intro)}</p>
+    ${p.sections.map(([h, body]) => `<h2>${esc(h)}</h2>\n${fill(body)}`).join("\n")}
+    <div class="guide-cta glass"><div><b>Prêt à commencer ?</b><span>Créez votre compte gratuitement en quelques minutes.</span></div><a class="pill" href="${APP_URL}/signup">Créer mon compte<span class="dot">${arrow}</span></a></div>
+    <h2>Questions fréquentes</h2>
+    ${p.faq.map(([q, a]) => `<details class="glass"><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join("")}
+  </article>
+  <nav class="legal-more" aria-label="Pages liées"><h2>À lire aussi</h2><ul>${related.map((q) => `<li><a href="/${q.slug}/">${esc(q.h1)}</a></li>`).join("")}<li><a href="/">Accueil Kasho Pay</a></li></ul></nav>
+</main>
+<footer class="foot"><div class="wrap notice"><p><strong>Kasho Pay n'est pas une banque.</strong> Nous sommes une fintech : un service de paiement numérique. Les cartes virtuelles sont émises via notre partenaire Freda Pay Issuing.</p></div><div class="wrap foot-in"><a class="logo" href="/"><img src="/img/kasho-mark.webp" alt="" width="36" height="36"><span>Kasho Pay</span></a><p>Kasho Pay est un service de ${esc(LEGAL.company)}.<br>© ${new Date().getFullYear()} ${esc(LEGAL.company)}. Tous droits réservés.</p></div></footer>
+</body>
+</html>
+`;
+}
 const INDEXABLE = [];
 
 // ------------------------------------------------------------------ write
 const write = (rel, data) => { const f = join(ROOT, rel); mkdirSync(dirname(f), { recursive: true }); writeFileSync(f, data); };
 write("index.html", page(T.fr));
+for (const p of SEO_PAGES) {
+  write(`${p.slug}/index.html`, guidePage(p));
+  INDEXABLE.push(`/${p.slug}/`);
+}
 for (const p of LEGAL_PAGES) {
   write(`${p.slug}/index.html`, legalPage(p, LEGAL_PAGES));
   if (!PLACEHOLDER.test(p.html)) INDEXABLE.push(`/${p.slug}/`);

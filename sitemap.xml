@@ -6,4 +6,9 @@
     <image:image><image:loc>https://kashopay.com/img/app-home.webp</image:loc><image:caption>Écran d'accueil de l'application Kasho Pay</image:caption></image:image>
     <image:image><image:loc>https://kashopay.com/img/app-card.webp</image:loc><image:caption>Écran des cartes virtuelles Kasho Pay</image:caption></image:image>
     <image:image><image:loc>https://kashopay.com/img/app-transfer.webp</image:loc><image:caption>Écran de transfert Kasho Pay</image:caption></image:image></url>
+  <url><loc>https://kashopay.com/kasho-pay/</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://kashopay.com/carte-visa-haiti/</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://kashopay.com/carte-mastercard-haiti/</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://kashopay.com/carte-virtuelle-haiti/</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://kashopay.com/recharger-moncash-natcash/</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
 </urlset>

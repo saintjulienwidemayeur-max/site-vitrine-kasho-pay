@@ -221,3 +221,17 @@ summary::-webkit-details-marker{display:none}summary::after{content:"+";font-siz
  .hero-cards .kc-logo img{width:28px;height:28px}.hero-cards .kc-num{font-size:12px}
 }
 @media (min-width:901px){.hero{min-height:max(100svh,840px)}}
+
+/* guides (search landing pages) */
+.guide .crumbs{font-size:13px;color:var(--mut);margin-bottom:14px}.guide .crumbs a{color:var(--mut);text-decoration:none}.guide .crumbs a:hover{color:#fff}
+.guide .ht-line{color:var(--g);font-weight:700;font-size:15px;letter-spacing:.02em;margin:0 0 18px}
+.guide h2{margin-top:32px}
+.guide details{margin-top:12px}.guide details p{padding:0 22px 20px}
+.guide-cta{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:20px 24px;margin:34px 0 10px;border-color:#2fe61944;background:linear-gradient(#2fe6190f,#2fe61905)}
+.guide-cta div{display:grid;gap:2px}.guide-cta b{font-size:18px;color:var(--tx)}.guide-cta span{color:#b5c9bb;font-size:14px}
+.guide-cta .pill{text-decoration:none;color:var(--tx)}
+.guide-grid{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:40px}
+.guide-grid li{padding:0}.guide-grid a{display:grid;gap:6px;padding:20px 22px;height:100%;position:relative;text-decoration:none}
+.guide-grid b{font-size:17px}.guide-grid span{color:var(--g);font-size:13px;font-weight:600}.guide-grid i{position:absolute;right:20px;top:20px;font-style:normal;color:var(--mut)}
+.guide-grid li:hover{border-color:var(--g)}
+.sec.guides{padding-top:50px}
