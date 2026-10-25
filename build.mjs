@@ -148,9 +148,11 @@ const abs = (p) => `${SITE_URL}${p}`;
 function jsonLd(t) {
   const org = {
     "@type": "Organization", "@id": `${SITE_URL}/#org`, name: "Kasho Pay", legalName: "KASHOPAY LLC", url: abs("/"),
-    logo: abs("/img/icon-192.png"), areaServed: { "@type": "Country", name: "Haiti" },
+    alternateName: "KASHOPAY",
+    logo: { "@type": "ImageObject", "@id": `${SITE_URL}/#logo`, url: abs("/img/logo-512.png"), contentUrl: abs("/img/logo-512.png"), width: 512, height: 512, caption: "Logo Kasho Pay" },
+    image: { "@id": `${SITE_URL}/#logo` }, areaServed: { "@type": "Country", name: "Haiti" },
   };
-  const site = { "@type": "WebSite", "@id": `${SITE_URL}/#site`, url: abs("/"), name: "Kasho Pay", inLanguage: "fr", publisher: { "@id": `${SITE_URL}/#org` } };
+  const site = { "@type": "WebSite", "@id": `${SITE_URL}/#site`, url: abs("/"), name: "Kasho Pay", alternateName: ["KASHOPAY", "Kasho Pay Haïti"], inLanguage: "fr", publisher: { "@id": `${SITE_URL}/#org` } };
   const appl = {
     "@type": "WebApplication", "@id": `${SITE_URL}/#app`, name: "Kasho Pay", url: APP_URL, applicationCategory: "FinanceApplication",
     operatingSystem: "Any (web browser)", inLanguage: t.lang, description: t.description, publisher: { "@id": `${SITE_URL}/#org` },
@@ -181,17 +183,21 @@ function page(t) {
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#020604">
 <meta name="geo.region" content="HT"><meta name="geo.placename" content="Haïti">
+<meta name="application-name" content="Kasho Pay"><meta name="author" content="KASHOPAY LLC">
 <link rel="canonical" href="${url}">
 <link rel="alternate" hreflang="fr" href="${abs("/")}">
+<link rel="alternate" hreflang="fr-HT" href="${abs("/")}">
 <link rel="alternate" hreflang="x-default" href="${abs("/")}">
-<link rel="icon" href="/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/img/favicon-96.png" sizes="96x96" type="image/png">
+<link rel="icon" href="/img/favicon-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Kasho Pay">
 <meta property="og:title" content="${esc(t.title)}"><meta property="og:description" content="${esc(t.description)}">
 <meta property="og:url" content="${url}"><meta property="og:locale" content="${t.locale}">
 <meta property="og:image" content="${abs("/img/og.jpg")}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="${esc(t.og)}">
+<meta property="og:image:type" content="image/jpeg"><meta property="og:image:alt" content="${esc(t.og)}">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(t.title)}">
 <meta name="twitter:description" content="${esc(t.description)}"><meta name="twitter:image" content="${abs("/img/og.jpg")}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -346,7 +352,9 @@ function legalPage(p, all) {
 <meta name="robots" content="${open ? "noindex, follow" : "index, follow"}">
 <meta name="theme-color" content="#020604">
 <link rel="canonical" href="${url}">
-<link rel="icon" href="/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/img/favicon-96.png" sizes="96x96" type="image/png">
+<link rel="icon" href="/img/favicon-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <meta property="og:type" content="article"><meta property="og:site_name" content="Kasho Pay"><meta property="og:locale" content="fr_HT">
 <meta property="og:title" content="${esc(p.title)} | Kasho Pay"><meta property="og:description" content="${esc(p.desc)}"><meta property="og:url" content="${url}">
@@ -383,14 +391,16 @@ for (const p of LEGAL_PAGES) {
   write(`${p.slug}/index.html`, legalPage(p, LEGAL_PAGES));
   if (!PLACEHOLDER.test(p.html)) INDEXABLE.push(`/${p.slug}/`);
 }
+const SITEMAP_IMAGES = [["/img/logo-512.png", "Logo Kasho Pay"], ["/img/og.jpg", "Kasho Pay : portefeuille numérique et cartes Visa et Mastercard pour Haïti"], ["/img/app-home.webp", "Écran d'accueil de l'application Kasho Pay"], ["/img/app-card.webp", "Écran des cartes virtuelles Kasho Pay"], ["/img/app-transfer.webp", "Écran de transfert Kasho Pay"]]
+  .map(([u, c]) => `\n    <image:image><image:loc>${abs(u)}</image:loc><image:caption>${esc(c)}</image:caption></image:image>`).join("");
 write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${["/", ...INDEXABLE].map((p) => `  <url><loc>${abs(p)}</loc><lastmod>${TODAY}</lastmod><changefreq>monthly</changefreq><priority>${p === "/" ? "1.0" : "0.4"}</priority></url>`).join("\n")}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+${["/", ...INDEXABLE].map((p) => `  <url><loc>${abs(p)}</loc><lastmod>${TODAY}</lastmod><changefreq>monthly</changefreq><priority>${p === "/" ? "1.0" : "0.4"}</priority>${p === "/" ? SITEMAP_IMAGES : ""}</url>`).join("\n")}
 </urlset>
 `);
 write("robots.txt", `User-agent: *\nAllow: /\n\nSitemap: ${abs("/sitemap.xml")}\n`);
 write("site.webmanifest", JSON.stringify({
   name: "Kasho Pay", short_name: "Kasho Pay", start_url: "/", display: "browser", background_color: "#020604", theme_color: "#020604", lang: "fr",
-  icons: [{ src: "/img/icon-192.png", sizes: "192x192", type: "image/png" }, { src: "/img/kasho-mark.png", sizes: "512x512", type: "image/png" }],
+  icons: [{ src: "/img/favicon-192.png", sizes: "192x192", type: "image/png" }, { src: "/img/logo-512.png", sizes: "512x512", type: "image/png" }],
 }, null, 2) + "\n");
 console.log(`Built for ${SITE_URL} (app: ${APP_URL})`);
