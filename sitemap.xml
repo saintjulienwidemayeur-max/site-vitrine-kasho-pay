@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  <url><loc>https://kashopay.com/</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>1.0</priority>
+  <url><loc>https://kashopay.com/</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>1.0</priority>
     <image:image><image:loc>https://kashopay.com/img/logo-512.png</image:loc><image:caption>Logo Kasho Pay</image:caption></image:image>
     <image:image><image:loc>https://kashopay.com/img/og.jpg</image:loc><image:caption>Kasho Pay : portefeuille numérique et cartes Visa et Mastercard pour Haïti</image:caption></image:image>
     <image:image><image:loc>https://kashopay.com/img/app-home.webp</image:loc><image:caption>Écran d'accueil de l'application Kasho Pay</image:caption></image:image>
     <image:image><image:loc>https://kashopay.com/img/app-card.webp</image:loc><image:caption>Écran des cartes virtuelles Kasho Pay</image:caption></image:image>
     <image:image><image:loc>https://kashopay.com/img/app-transfer.webp</image:loc><image:caption>Écran de transfert Kasho Pay</image:caption></image:image></url>
-  <url><loc>https://kashopay.com/kasho-pay/</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://kashopay.com/carte-visa-haiti/</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://kashopay.com/carte-mastercard-haiti/</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://kashopay.com/carte-virtuelle-haiti/</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://kashopay.com/recharger-moncash-natcash/</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://kashopay.com/mentions-legales/</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://kashopay.com/politique-cookies/</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://kashopay.com/conditions-cartes-virtuelles/</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://kashopay.com/lutte-contre-la-fraude/</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://kashopay.com/kasho-pay/</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://kashopay.com/carte-visa-haiti/</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://kashopay.com/carte-mastercard-haiti/</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://kashopay.com/carte-virtuelle-haiti/</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://kashopay.com/recharger-moncash-natcash/</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://kashopay.com/mentions-legales/</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://kashopay.com/politique-cookies/</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://kashopay.com/conditions-cartes-virtuelles/</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://kashopay.com/lutte-contre-la-fraude/</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
 </urlset>

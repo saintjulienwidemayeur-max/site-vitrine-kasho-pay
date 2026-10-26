@@ -5,6 +5,7 @@
 //   SITE_URL       public address of this site          (default https://kashopay.com)
 //   APP_URL        address of the Kasho Pay web app      (default https://app.kashopay.com)
 //   CONTACT_EMAIL  shown in the footer when set
+//   SAME_AS        comma-separated profile URLs (Facebook, Instagram, LinkedIn...) listed as Organization sameAs
 //   WHATSAPP       international number without + (e.g. 50937001234), shown in the footer when set
 import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -16,6 +17,7 @@ const ROOT = dirname(fileURLToPath(import.meta.url));
 const SITE_URL = (process.env.SITE_URL ?? "https://kashopay.com").replace(/\/+$/, "");
 const APP_URL = (process.env.APP_URL ?? "https://app.kashopay.com").replace(/\/+$/, "");
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL ?? "support@kashopay.com";
+const SAME_AS = (process.env.SAME_AS ?? "").split(",").map((u) => u.trim()).filter((u) => /^https:\/\//.test(u));
 const WHATSAPP = (process.env.WHATSAPP ?? "").replace(/\D/g, "");
 const TODAY = new Date().toISOString().slice(0, 10);
 const SEO_PAGES = seoPages();
@@ -153,6 +155,8 @@ function jsonLd(t) {
     alternateName: ["KashoPay", "KASHOPAY", "Kasho-Pay"],
     logo: { "@type": "ImageObject", "@id": `${SITE_URL}/#logo`, url: abs("/img/logo-512.png"), contentUrl: abs("/img/logo-512.png"), width: 512, height: 512, caption: "Logo Kasho Pay" },
     image: { "@id": `${SITE_URL}/#logo` }, areaServed: { "@type": "Country", name: "Haiti" },
+    ...(SAME_AS.length ? { sameAs: SAME_AS } : {}),
+    ...(CONTACT_EMAIL ? { contactPoint: { "@type": "ContactPoint", contactType: "customer support", email: CONTACT_EMAIL, availableLanguage: ["fr", "ht"] } } : {}),
   };
   const site = { "@type": "WebSite", "@id": `${SITE_URL}/#site`, url: abs("/"), name: "Kasho Pay", alternateName: ["KashoPay", "KASHOPAY", "Kasho-Pay", "Kasho Pay Haïti"], inLanguage: "fr", publisher: { "@id": `${SITE_URL}/#org` } };
   const appl = {
